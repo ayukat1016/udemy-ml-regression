@@ -1,7 +1,31 @@
 # udemy-ml-regression
+サンプルコードの実行手順を記載します。
+
+## ライブラリのバージョン
+ライブラリはコンテンツ作成時点の[Google Colaboratory](https://colab.google/)の最新バージョンになります。Colabのライブラリは定期的に更新するので、プログラム実行時にエラーが発生する場合、以下のバージョンに戻してください。また、Dockerの実行環境でも以下のバージョンを使用します。
+- Python 3.10.12
+- pandas 2.0.3
+- numpy 1.25.2
+- matplotlib 3.7.1
+- seaborn 0.13.1
+- scikit-learn 1.2.2
+- graphviz 0.20.3
+- lightgbm 4.1.0
 
 
-## Dockerの実行手順
+## Google Colaboratoryの実行環境
+[Google Colaboratory](https://colab.google/)はクラウド環境でNotebookを提供します。リンク先にアクセスすると環境構築済みの実行環境を利用できます。
+
+## Dockerの実行環境
+- コマンドラインでディレクトリ`udemy-ml-regression`に移動します。
+```sh
+# ディレクトリの移動
+$ cd udemy-ml-regression/
+
+# ディレクトリの確認(`/xxx/work`はユーザにより異なります。)
+$ pwd
+/home/xxx/work/udemy-ml-regression
+```
 
 - `Dockerfile`を指定して、imageをビルドします。
 
