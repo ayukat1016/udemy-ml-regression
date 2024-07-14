@@ -15,7 +15,7 @@
 - shap 0.41.0
 - xgboost 2.0.3
 - optuna 3.1.1
-
+- japanize-matplotlib 1.1.3
 
 ## Google Colaboratoryの実行環境
 [Google Colaboratory](https://colab.google/)はクラウド環境でNotebookを提供します。リンク先にアクセスすると環境構築済みの実行環境を利用できます。
