@@ -20,9 +20,25 @@
 ## Google Colaboratoryの実行環境
 [Google Colaboratory](https://colab.google/)はクラウド環境でNotebookを提供します。リンク先にアクセスすると環境構築済みの実行環境を利用できます。
 
-## Dockerの実行環境
-- コマンドラインでディレクトリ`udemy-ml-regression`に移動します。
+## Dockerコンテナの基本操作
+- ubuntuのイメージを使って、コンテナの動きを確認します。
 ```sh
+# コンテナの起動
+docker run -it -w /opt ubuntu:latest bash
+
+# マウントしてコンテナ起動
+docker run -it -w /opt -v $PWD:/opt ubuntu:latest bash
+
+# マウントしてコンテナ起動、コンテナ自動削除
+docker run --rm -it -w /opt -v $PWD:/opt ubuntu:latest bash
+```
+
+## Dockerコンテナの実行環境
+- コマンドラインでリポジトリをgit cloneし、ディレクトリ`udemy-ml-regression`に移動します。
+```sh
+# リポジトリの取得
+$ git clone https://github.com/ayukat1016/udemy-ml-regression.git
+
 # ディレクトリの移動
 $ cd udemy-ml-regression/
 
@@ -39,14 +55,19 @@ Dockerfile  README.md  notebook  poetry.lock  pyproject.toml  requirements.txt
 
 ```sh
 # ビルド
-$ docker build --platform linux/amd64 -t udemy-ml-regression:1.0.0 -f Dockerfile .
+$ docker build --platform linux/amd64 -t udemy-ml:1.0.0 -f Dockerfile .
+
+# ビルドしたイメージの確認
+$ docker images
+REPOSITORY  TAG    IMAGE ID       CREATED         SIZE
+udemy-ml    1.0.0  dc9d49408715   5 days ago      1.62GB
 ```
 
 - imageを指定してコンテナを起動、Jupyter Labのコマンドを実行します。サンプルコードのNotebookを`-v`でコンテナにマウントします。
 
 ```sh
 # コンテナ起動＋Jupyter Lab実行
-$ docker run -it --rm --name udemy-ml-regression -v $PWD:/opt -p 8888:8888 udemy-ml-regression:1.0.0 jupyter lab --ip=0.0.0.0 --allow-root --NotebookApp.token=''
+$ docker run -it --rm --name udemy-ml -v $PWD:/opt -p 8888:8888 udemy-ml:1.0.0 jupyter lab --ip=0.0.0.0 --allow-root --NotebookApp.token=''
 ```
 
 - webブラウザのURL http://localhost:8888 にアクセスし、サンプルコードを実行します。
