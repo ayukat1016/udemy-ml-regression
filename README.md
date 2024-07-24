@@ -20,20 +20,51 @@
 ## Google Colaboratoryの実行環境
 [Google Colaboratory](https://colab.google/)はクラウド環境でNotebookを提供します。リンク先にアクセスすると環境構築済みの実行環境を利用できます。
 
-## Dockerコンテナの基本操作
+## Dockerコンテナの起動、停止、削除
 - ubuntuのイメージを使って、コンテナの動きを確認します。
 ```sh
 # コンテナの起動
-docker run -it -w /opt ubuntu:latest bash
+$ docker run -it -w /opt ubuntu:latest bash
 
-# マウントしてコンテナ起動
-docker run -it -w /opt -v $PWD:/opt ubuntu:latest bash
+# exitでコンテナの停止（Ctrl + Dでも可）
+root@b682fc2845c6:/opt#
 
-# マウントしてコンテナ起動、コンテナ自動削除
-docker run --rm -it -w /opt -v $PWD:/opt ubuntu:latest bash
+# コンテナの起動（コンテナ自動削除のオプション指定）
+$ docker run --rm -it -w /opt ubuntu:latest bash
+
+# exitでコンテナの停止、削除（Ctrl + Dでも可）
+root@034c83e49f1b:/opt#
 ```
 
-## Dockerコンテナの実行環境
+## マウントしてコンテナ起動
+- Python3.10.12インストール済みのイメージを使って、コンテナの動きを確認します。
+- ディレクトリ`work`にファイルを格納しておき、コンテナ内にマウントします。
+```sh
+# ディレクトリの確認(`/xxx/work`はユーザにより異なります。)
+$ pwd
+/home/xxx/work
+
+# ファイルの確認
+$ ls
+sample.py
+
+# マウントしてコンテナの起動
+$ docker run --rm -it -w /opt -v $PWD:/opt python:3.10.12 bash
+
+# コンテナ内でファイルの確認
+root@f9820da51a5b:/opt# ls
+sample.py
+
+# コンテナ内でPythonの実行
+root@f9820da51a5b:/opt# python sample.py
+Hello Python
+
+# 一括実行
+$ docker run --rm -it -w /opt -v $PWD:/opt python:3.10.12 python sample.py
+Hello Python
+```
+
+##  Dockerイメージのビルド
 - コマンドラインでリポジトリをgit cloneし、ディレクトリ`udemy-ml-regression`に移動します。
 ```sh
 # リポジトリの取得
@@ -63,6 +94,7 @@ REPOSITORY  TAG    IMAGE ID       CREATED         SIZE
 udemy-ml    1.0.0  dc9d49408715   5 days ago      1.62GB
 ```
 
+## Dockerコンテナの起動とNotebook実行
 - imageを指定してコンテナを起動、Jupyter Labのコマンドを実行します。サンプルコードのNotebookを`-v`でコンテナにマウントします。
 
 ```sh
