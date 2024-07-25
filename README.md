@@ -64,9 +64,13 @@ $ docker run --rm -it -w /opt -v $PWD:/opt python:3.10.12 python sample.py
 Hello Python
 ```
 
-##  Dockerイメージのビルド
+##  Githubからのコード取得
 - コマンドラインでリポジトリをgit cloneし、ディレクトリ`udemy-ml-regression`に移動します。
 ```sh
+# ディレクトリの確認(`/xxx/work`はユーザにより異なります。)
+$ pwd
+/home/xxx/work
+
 # リポジトリの取得
 $ git clone https://github.com/ayukat1016/udemy-ml-regression.git
 
@@ -82,6 +86,7 @@ $ ls
 Dockerfile  README.md  notebook  poetry.lock  pyproject.toml  requirements.txt
 ```
 
+##  Dockerイメージのビルド
 - `Dockerfile`を指定して、imageをビルドします。
 
 ```sh
